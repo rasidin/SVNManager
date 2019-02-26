@@ -23,6 +23,7 @@ class PendingListData():
 	def __init__(self, filepath):
 		self.filepath = filepath
 		self.id = '%x'%uuid1()
+		self.list = []
 		self.load()
 	def load(self):
 		if os.path.exists(self.filepath) is False:

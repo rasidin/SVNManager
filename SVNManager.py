@@ -9,7 +9,9 @@ from SVNManagerConfig import *
 from SVNCmd import *
 from FileBrowserTree import *
 from PendingList import *
+from UpdateList import *
 from HistoryList import *
+from ShelveList import *
 from MergeTool import *
 from LinkTool import *
 import TortoiseSVNCmd
@@ -88,7 +90,9 @@ class SVNManagerWindow(QMainWindow):
 		mainWidget.setStretchFactor(1, 7)
 		
 		mainTabWidget.addTab(self.initPendingWidget(), 'Pending')
+		mainTabWidget.addTab(self.initUpdateWidget(), 'Update')
 		mainTabWidget.addTab(self.initHistoryWidget(), 'History')
+		mainTabWidget.addTab(self.initShelveWidget(), 'Shelve')
 		mainTabWidget.addTab(self.initMergeWidget(), 'Merge')
 		mainTabWidget.addTab(self.initLinkWidget(), 'Link')
 		
@@ -97,10 +101,18 @@ class SVNManagerWindow(QMainWindow):
 	def initPendingWidget(self):
 		self.pendingList = PendingList(self.svn, 'SVNManager.Pending.xml')
 		return self.pendingList
-					
+		
+	def initUpdateWidget(self):
+		self.updateList = UpdateList()
+		return self.updateList
+		
 	def initHistoryWidget(self):
 		historyWidget = HistoryList(self.svn)
 		return historyWidget
+		
+	def initShelveWidget(self):
+		shelveWidget = ShelveList(self.svn)
+		return shelveWidget
 		
 	def initMergeWidget(self):
 		diffWidget = MergeTool(self.svn)

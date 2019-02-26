@@ -26,6 +26,13 @@ class ConfigDialog(QDialog):
 		RepoLayout.addWidget(self.LERepo)
 		mainLayout.addLayout(RepoLayout)
 		
+		ShelveLayout = QHBoxLayout()
+		ShelveLayout.addWidget(QLabel('ShelvePath', self))
+		self.LEShelve = QLineEdit(self)
+		self.LEShelve.setText(self.config.shelvepath)
+		ShelveLayout.addWidget(self.LEShelve)
+		mainLayout.addLayout(ShelveLayout)
+		
 		EditorLayout = QHBoxLayout()
 		EditorLayout.addWidget(QLabel('Editor', self))
 		self.LEEditorPath = QLineEdit(self)
@@ -66,6 +73,7 @@ class ConfigDialog(QDialog):
 	def accept(self):
 		self.config.rootpath = self.LERootPath.text()
 		self.config.repository = self.LERepo.text()
+		self.config.shelvepath = self.LEShelve.text()
 		self.config.editorpath = self.LEEditorPath.text()
 		self.config.user = self.LEID.text()
 		self.config.password = self.LEPW.text()

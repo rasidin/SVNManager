@@ -31,6 +31,7 @@ class SVNManagerConfig():
 		if os.path.exists(filepath) is False:
 			self.rootpath = ''
 			self.repository = ''
+			self.shelvepath = ''
 			self.editorpath = ''
 			self.user = ''
 			self.password = ''
@@ -47,6 +48,11 @@ class SVNManagerConfig():
 			self.repository = svnRepositoryNode.text
 		else:
 			self.repository = ''
+		svnShelvePathNode = root.find('shelvepath')
+		if svnShelvePathNode is not None:
+			self.shelvepath = svnShelvePathNode.text
+		else:
+			self.shelvepath = ''
 		svnEditorPathNode = root.find('editorpath')
 		if svnEditorPathNode is not None:
 			self.editorpath = svnEditorPathNode.text
@@ -79,6 +85,10 @@ class SVNManagerConfig():
 		if svnRepositoryNode is None:		
 			svnRepositoryNode = ET.SubElement(root, 'repository')
 		svnRepositoryNode.text = self.repository
+		svnShelvePathNode = root.find('shelvepath')
+		if svnShelvePathNode is None:
+			svnShelvePathNode = ET.SubElement(root, 'shelvepath')
+		svnShelvePathNode.text = self.shelvepath
 		svnEditorPathNode = root.find('editorpath')
 		if svnEditorPathNode is None:
 			svnEditorPathNode = ET.SubElement(root, 'editorpath')
